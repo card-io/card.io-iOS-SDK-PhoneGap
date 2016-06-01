@@ -2,29 +2,30 @@
 
 package io.card.cordova.sdk;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.PermissionHelper;
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.pm.PackageManager;
 
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
 
 public class CardIOCordovaPlugin extends CordovaPlugin {
 
+    private String TAG = CardIOCordovaPlugin.class.getSimpleName();
     private CallbackContext callbackContext;
     private Activity activity = null;
     private static final int REQUEST_CARD_SCAN = 10;
+
+    private String[] requiredPermissions = {Manifest.permission.CAMERA};
 
     @Override
     public boolean execute(String action, JSONArray args,
@@ -78,12 +79,19 @@ public class CardIOCordovaPlugin extends CordovaPlugin {
     }
 
     private void canScan(JSONArray args) throws JSONException {
-        if (CardIOActivity.canReadCardWithCamera()) {
-            // This is where we return if scanning is enabled.
-            this.callbackContext.success("Card Scanning is enabled");
+
+        if (!hasPermisssion(requiredPermissions)) {
+            PermissionHelper.requestPermissions(this, 0, requiredPermissions);
+            this.callbackContext.error("Camera usage is not allowed");
         } else {
-            this.callbackContext.error("Card Scanning is not enabled");
+            if (CardIOActivity.canReadCardWithCamera()) {
+                // This is where we return if scanning is enabled.
+                this.callbackContext.success("Card Scanning is enabled");
+            } else {
+                this.callbackContext.error("Card Scanning is not enabled");
+            }
         }
+
     }
 
     // onActivityResult
@@ -136,4 +144,33 @@ public class CardIOCordovaPlugin extends CordovaPlugin {
             return defaultValue;
         }
     }
+
+    public boolean hasPermisssion(String[] requestedPermissions) {
+        for(String p : requestedPermissions) {
+            if(!PermissionHelper.hasPermission(this, p)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void onRequestPermissionResult(int requestCode, String[] permissions,
+            int[] grantResults) throws JSONException {
+        PluginResult result;
+
+        if (callbackContext != null) {
+            for (int r : grantResults) {
+                if (r == PackageManager.PERMISSION_DENIED) {
+                    result = new PluginResult(PluginResult.Status.ILLEGAL_ACCESS_EXCEPTION);
+                    callbackContext.sendPluginResult(result);
+                    return;
+                }
+
+            }
+            result = new PluginResult(PluginResult.Status.OK);
+            callbackContext.sendPluginResult(result);
+        }
+    }
+
+
 }
