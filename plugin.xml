@@ -69,7 +69,25 @@
         </config-file>
 
         <source-file src="src/android/CardIOCordovaPlugin.java" target-dir="src/io/card/cordova/sdk" />
-	      <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <!-- Permission to vibrate - recommended, allows vibration feedback on scan -->
+            <uses-permission android:name="android.permission.VIBRATE" />
+
+            <!-- Permission to use camera - required -->
+            <uses-permission android:name="android.permission.CAMERA" />
+
+            <!-- Camera features - recommended -->
+            <uses-feature android:name="android.hardware.camera" android:required="false" />
+            <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+            <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+        </config-file>
+
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <activity android:name="io.card.payment.CardIOActivity" android:configChanges="keyboardHidden|orientation" />
+            <activity android:name="io.card.payment.DataEntryActivity" />
+        </config-file>
 
     </platform>
 
