@@ -82,12 +82,12 @@
         paymentViewController.hideCardIOLogo = [hideCardIOLogo boolValue];
     }
 
-    NSNumber *suppressScanConfirmation = [options objectForKey:@"suppressScan"];
+    NSNumber *suppressScanConfirmation = [options objectForKey:@"suppressConfirmation"];
     if (suppressScanConfirmation) {
         paymentViewController.suppressScanConfirmation = [suppressScanConfirmation boolValue];
     }
 
-    NSNumber *disableManualEntryButtons = [options objectForKey:@"supressManual"];
+    NSNumber *disableManualEntryButtons = [options objectForKey:@"suppressManual"];
     if (disableManualEntryButtons) {
         paymentViewController.disableManualEntryButtons = [disableManualEntryButtons boolValue];
     }

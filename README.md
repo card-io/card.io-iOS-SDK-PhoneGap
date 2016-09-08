@@ -20,7 +20,7 @@ The card.io Cordova plugin provides different configurations that could be set a
 |  requireExpiry                   | Boolean  | Expiry information will not be required. |
 |  requireCVV                      | Boolean  | The user will be prompted for the card CVV |
 |  requirePostalCode               | Boolean  | The user will be prompted for the card billing postal code. |
-|  supressManual                   | Boolean  | Removes the keyboard button from the scan screen. |
+|  suppressManual                  | Boolean  | Removes the keyboard button from the scan screen. |
 |  restrictPostalCodeToNumericOnly | Boolean  | The postal code will only collect numeric input. Set this if you know the expected country's postal code has only numeric postal codes. |
 |  keepApplicationTheme            | Boolean  | The theme for the card.io Activity's will be set to the theme of the application. |
 |  requireCardholderName           | Boolean  | The user will be prompted for the cardholder name |
