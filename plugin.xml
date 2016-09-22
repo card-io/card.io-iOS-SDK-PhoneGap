@@ -4,7 +4,7 @@
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="card.io.cordova.mobilesdk"
-    version="2.0.1">
+    version="2.0.2">
     <name>CardIO</name>
     <description>This plugin allows to add to add CardIO to your application using CardIO Native library</description>
     <license>MIT License, see LICENSE.md for details</license>

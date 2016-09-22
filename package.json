@@ -1,6 +1,6 @@
 {
   "name": "card.io.cordova.mobilesdk",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "This plugin allows to add card.io scanning capabilities to your application using card.io SDK Native library",
   "cordova": {
     "id": "card.io.cordova.mobilesdk",
