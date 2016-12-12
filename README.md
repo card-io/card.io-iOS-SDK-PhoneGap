@@ -54,15 +54,18 @@ The card.io Cordova Plugin adds support for the CardIO iOS and android platform.
 1.	Follow Your app integration section below.
 2.	Run `cordova run ios` or `cordova run android` to build and the project.
 
-Note: For use with iOS 10 +
-When building your app with the iOS 10 SDK +, you have to add some info to the info.plist file. This is due to increased security in iOS 10. Go to your app directory and search for the &lt;your app name&gt;Info.plist file. Add the following lines in the main &lt;dict&gt; element.
+## iOS Quirks
 
-```xml
-      <key>NSCameraUsageDescription</key>
-      <string>To scan credit cards.</string>
-```
+Since iOS 10 it's mandatory to add a `NSCameraUsageDescription` entry in the info.plist.
 
-If you have a different way to edit .plist files - plugins etc. - you can do that.
+`NSCameraUsageDescription` describes the reason that the app accesses the user's camera.
+
+When the system prompts the user to allow access, this string is displayed as part of the dialog box. To add this entry you can pass the variable `CARD_IO_CAMERA_USAGE_DESCRIPTION` on plugin install.
+
+Example:
+`cordova plugin add https://github.com/card-io/card.io-Cordova-Plugin --variable CARD_IO_CAMERA_USAGE_DESCRIPTION="your usage message"`
+
+If you don't pass the variable, the plugin will add a default string as value.
 
 Sample HTML + JS
 ----------------

@@ -57,6 +57,12 @@
         <framework src="UIKit.framework" />
         <framework src="libc++.dylib" />
 
+        <!-- ios 10 camera usage description -->
+        <preference name="CARD_IO_CAMERA_USAGE_DESCRIPTION" default="${EXECUTABLE_NAME} Would like to use your camera to scan credit cards." />
+        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+         <string>$CARD_IO_CAMERA_USAGE_DESCRIPTION</string>
+        </config-file>
+
     </platform>
 
     <!-- android -->
