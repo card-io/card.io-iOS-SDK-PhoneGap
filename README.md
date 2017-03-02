@@ -33,6 +33,7 @@ The card.io Cordova plugin provides different configurations that could be set a
 |  hideCardIOLogo                  | Boolean  | The card.io logo will not be shown overlaid on the camera. |
 |  useCardIOLogo                   | Boolean  | The card.io logo will be shown instead of the PayPal logo. |
 |  suppressScan                    | Boolean  | Once a card image has been captured but before it has been processed, this value will determine whether to continue processing as usual. |
+| usePaypalActionbarIcon           | Boolean | Use the PayPal icon in the ActionBar |
 
 Integration instructions
 ------------------------
