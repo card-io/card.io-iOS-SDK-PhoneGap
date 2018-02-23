@@ -74,6 +74,7 @@ public class CardIOCordovaPlugin extends CordovaPlugin {
         scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_CONFIRMATION, this.getConfiguration(configurations, "suppressConfirmation", false)); // default: false
         scanIntent.putExtra(CardIOActivity.EXTRA_HIDE_CARDIO_LOGO, this.getConfiguration(configurations, "hideCardIOLogo", false)); // default: false
         scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_SCAN, this.getConfiguration(configurations, "suppressScan", false)); // default: false
+        scanIntent.putExtra(CardIOActivity.EXTRA_RETURN_CARD_IMAGE, this.getConfiguration(configurations, "returnImage", false));
         this.cordova.startActivityForResult(this, scanIntent, REQUEST_CARD_SCAN);
     }
 
