@@ -99,7 +99,7 @@
     }
 
     // if it is nil, its ok.
-    NSString *scanInstructions = [[[NSLocale alloc] initWithLocaleIdentifier:[options objectForKey:@"scanInstructions"]] localeIdentifier];
+    NSString *scanInstructions = [options objectForKey:@"scanInstructions"];
     if (scanInstructions) {
         paymentViewController.scanInstructions = scanInstructions;
     }
