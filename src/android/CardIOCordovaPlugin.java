@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import android.os.Bundle;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -86,6 +87,12 @@ public class CardIOCordovaPlugin extends CordovaPlugin {
         }
     }
 
+    // onSaveInstanceState
+    public Bundle onSaveInstanceState() {
+        Bundle state = new Bundle();
+        return state;
+    }
+
     // onActivityResult
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (REQUEST_CARD_SCAN == requestCode) {
@@ -105,6 +112,11 @@ public class CardIOCordovaPlugin extends CordovaPlugin {
                 this.callbackContext.error(resultCode);
             }
         }
+    }
+
+    // onRestoreStateForActivityResult
+    public void onRestoreStateForActivityResult(Bundle state, CallbackContext callbackContext) {
+        this.callbackContext = callbackContext;
     }
 
     private JSONObject toJSONObject(CreditCard card) {
