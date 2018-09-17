@@ -87,22 +87,19 @@ public class CardIOCordovaPlugin extends CordovaPlugin {
     }
 
     // onActivityResult
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
         if (REQUEST_CARD_SCAN == requestCode) {
-            if (resultCode == CardIOActivity.RESULT_CARD_INFO) {
-                CreditCard scanResult = null;
-                if (intent.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
-                    scanResult = intent
-                            .getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
-                    this.callbackContext.success(this.toJSONObject(scanResult));
-                } else {
-                    this.callbackContext
-                            .error("card was scanned but no result");
-                }
-            } else if (resultCode == Activity.RESULT_CANCELED) {
+            if (resultCode == Activity.RESULT_CANCELED) {
                 this.callbackContext.error("card scan cancelled");
+                return;
+            }
+            if (intent.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
+                CreditCard scanResult = intent.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
+                this.callbackContext.success(this.toJSONObject(scanResult));
             } else {
-                this.callbackContext.error(resultCode);
+                this.callbackContext.error("card was scanned but no result");
             }
         }
     }
