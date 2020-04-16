@@ -6,7 +6,7 @@
 //
 
 #import <Cordova/CDV.h>
-#import "CardIO.h"
+#import "CardIO/CardIO.h"
 
 
 @interface CardIOCordovaPlugin : CDVPlugin<CardIOPaymentViewControllerDelegate>
